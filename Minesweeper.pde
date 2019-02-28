@@ -1,4 +1,3 @@
-
 import de.bezier.guido.*;
 //Declare and initialize NUM_ROWS and NUM_COLS = 20
 public final static int NUM_ROWS = 20;
@@ -23,19 +22,19 @@ void setup ()
         for(int c = 0; c < NUM_COLS; c++) 
             buttons[r][c] = new MSButton(r, c);
 
-    setBombs();
+    while(bombs.size() < NUM_BOMBS) {
+        setBombs();
+    }
 }
 public void setBombs()
 {
-    //your code
-    while(bombs.size() < NUM_BOMBS) {
+    //your codE
         int r = (int)(Math.random()*NUM_ROWS);
         int c = (int)(Math.random()*NUM_COLS);
         if(bombs.contains(buttons[r][c]) == false) {
             bombs.add(buttons[r][c]);
             System.out.println("BOMB LOCATION: " + r + ", " + c);
         }
-    }
 }
 
 public void draw ()
@@ -91,19 +90,20 @@ public class MSButton
     {
         clicked = true;
         //your code here
-        if(mouseButton == RIGHT) {
+        marked = false;
+        if (mouseButton == RIGHT) {
             marked = !marked;
-            if(!marked)
+            if (marked == false)
                 clicked = false;
-        } else if(bombs.contains( this )) {
+        } else if (bombs.contains(this)) {
             displayLosingMessage();
-        } else if(countBombs(r,c) > 0) {
+        } else if (countBombs(r, c) > 0) {
             setLabel(str(countBombs(r, c)));
         } else {
-            for(int row = r - 1; row < r + 1; row++)
-                for(int col = c - 1; col < c + 1; col++)
-                    if(isValid(row, col) && !buttons[row][col].isClicked())
-                        buttons[row][col].mousePressed();
+            for(int row = r - 1; ro <= r + 1; ro++)
+                for(int col. = c - 1; co <= c + 1; co++)
+                    if(isValid(roW, coL) && !buttons[row][col].isClicked())
+                        buttons[ro][co].mousePressed();
         }
     }
 
@@ -137,12 +137,10 @@ public class MSButton
     {
         int numBombs = 0;
         //your code here
-        for(int r = row - 1; r < row + 1; r++)
-            for(int c = col - 1; c < col + 1; c++)
-                if(isValid(r, c) && bombs.contains(buttons[r][c]) == true)
+        for(int r = row - 1; r <= row + 2; r++)
+            for(int c = col - 1; c <= col + 2; c++)
+                if (isValid(r, c) && bombs.contains(buttons[r][c]) == true) 
                     numBombs++;
         return numBombs;
     }
 }
-
-
