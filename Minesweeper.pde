@@ -32,7 +32,6 @@ public void setBombs()
         int c = (int)(Math.random()*NUM_COLS);
         if(bombs.contains(buttons[r][c]) == false) {
             bombs.add(buttons[r][c]);
-            System.out.println("BOMB LOCATION: " + r + ", " + c);
         }
 }
 
@@ -119,6 +118,7 @@ public class MSButton
                 clicked = false;
         } else if (bombs.contains(this)) {
             displayLosingMessage();
+            noLoop();
         } else if (countBombs(r, c) > 0) {
             setLabel(str(countBombs(r, c)));
         } else {
@@ -166,6 +166,3 @@ public class MSButton
         return numBombs;
     }
 }
-
-
-
